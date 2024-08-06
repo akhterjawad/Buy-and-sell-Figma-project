@@ -3,11 +3,13 @@
 // // import { auth } from "./config.js";
 
 
-// let form = document.querySelector('#form');
+let form = document.querySelector('#form');
 // let email = document.querySelector('#email');
 // let password = document.querySelector('#password');
-// form.addEventListener('submit',event=>{
-//     event.preventDefault();
+form.addEventListener('submit',event=>{
+    event.preventDefault();
+    console.log(`h`);
+    
 //     createUserWithEmailAndPassword(auth, email.value, password.value)
 //       .then((userCredential) => {
 //         // Signed up 
@@ -20,4 +22,4 @@
 //         const errorMessage = error.message;
 //         console.log(errorMessage);
 //       });
-// })
+})

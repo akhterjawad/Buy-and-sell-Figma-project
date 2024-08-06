@@ -3,11 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>home</title>
+    <style>
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        } 
+        .div-icon{
+            position:relative
+            /* z-index: -100 !important; */
+        }
+        
+      </style>
+      <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <h1>home</h1>
-    <button class="button">logout</button>
-    <script type="module" src="./home.js"></script>
+    <div class="bg-blue-500 navbar border flex justify-start items-center h-16 text-2xl sm:text-3xl">
+        <p class="ml-5 text-white">Buy / Sells Corner</p>
+      </div>
+<h1 class="text-4xl text-center mt-8 font-semibold" >Post AD</h1>
+<div class="border flex flex-wrap justify-center items-center bg-blue-500 h-[15rem] border-gray-300 ml-20 mr-20 div-photo">
+<input type="file" class="opacity-100 h-full w-full">
+<div class="border-white div-icon border rounded-3xl text-8xl font-bold">+</div>
+</div>
+      <!-- <button class="button">logout</button> -->
+      <script type="module" src="./home.js"></script>
+      <script src="https://cdn.tailwindcss.com"></script>
 </body>
 </html>
