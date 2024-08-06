@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>home</title>
+    <!-- General CSS Reset -->
     <style>
         * {
             margin: 0;
@@ -12,10 +13,12 @@
             box-sizing: border-box;
         }
 
+        /* Styling for the photo upload container */
         .div-photo {
             position: relative;
         }
 
+        /* Styling for the icon inside the photo upload container */
         .div-icon {
             position: absolute;
             top: 50%;
@@ -24,6 +27,7 @@
             cursor: pointer;
         }
 
+        /* Hides the file input but keeps it functional */
         input[type="file"] {
             position: absolute;
             top: 0;
@@ -31,26 +35,35 @@
             cursor: pointer;
         }
 
+        /* Custom class for bold placeholder text */
         .placeholder-bold::placeholder {
             font-weight: 600;
         }
     </style>
+    <!-- Importing DaisyUI library for additional styles -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
+    <!-- Navbar with logo and title -->
     <div class="bg-blue-500 navbar border flex justify-between items-center h-16 text-2xl sm:text-3xl">
-        <p class="ml-5 text-white">Buy / Sells Corner</p><img src="./image/og_infinix_logo.png"
-            class="w-[6%] mr-[10px] rounded-full" alt="">
+        <p class="ml-5 text-white">Buy / Sells Corner</p>
+        <img src="./image/og_infinix_logo.png" class="w-[6%] mr-[10px] rounded-full" alt="">
     </div>
+    <!-- Main heading for the page -->
     <h1 class="text-3xl text-center mt-8 font-semibold sm:text-4xl">Post AD</h1>
+    <!-- Photo upload container -->
     <div
         class="border w-[91%] m-auto flex flex-wrap justify-center items-center bg-blue-500 h-[270px] sm:h-[373px] rounded sm:rounded-none border-gray-300 div-photo">
+        <!-- Hidden file input for photo upload -->
         <input type="file" id="file-input" class="opacity-0 absolute h-full w-full">
+        <!-- Plus icon to trigger the file input click -->
         <div class="pt-[0px] pb-[5px] pl-[5px] pr-[5px] border-white div-icon border rounded-3xl border-[10px] text-8xl font-bold text-white"
             onclick="document.getElementById('file-input').click()">+</div>
+        <!-- Instruction text for uploading a photo -->
         <div class="text-white mt-[13rem] text-[1.5rem]">Upload product photo</div>
     </div>
+    <!-- Input fields for ad details -->
     <input type="text"
         class="w-[91%] m-auto placeholder-bold mt-5 ml-[4%] rounded m-auto border-gray-300 border p-[8px]" name=""
         placeholder="Product title" id="">
@@ -61,9 +74,12 @@
         name="" placeholder="RS     Enter Price" id="">
     <input type="text" class="w-[91%] m-auto mt-5 ml-[4%] border-gray-300 border p-[8px] placeholder-bold" name=""
         placeholder="Enter name" id="">
-    <input type="number" class="mb-[10px] w-[91%] m-auto ml-[4%] border-gray-300 border p-[8px] placeholder-bold" name="" placeholder="Enter your number" id="">
+    <input type="number" class="mb-[10px] w-[91%] m-auto ml-[4%] border-gray-300 border p-[8px] placeholder-bold"
+        name="" placeholder="Enter your number" id="">
     <!-- <button class="button">logout</button> -->
+    <!-- Importing JavaScript module for additional functionality -->
     <script type="module" src="./home.js"></script>
+    <!-- Importing TailwindCSS library -->
     <script src="https://cdn.tailwindcss.com"></script>
 </body>
 
