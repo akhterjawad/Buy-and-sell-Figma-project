@@ -6,21 +6,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>products</title>
     <style>
+        /* Reset margins and padding for all elements, and use border-box sizing */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
     </style>
+    <!-- Link to DaisyUI for styling -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <!-- FontAwesome link for icons -->
+    <script src="https://kit.fontawesome.com/c168b7d2e2.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <!-- Navbar with logo and title -->
     <div class="bg-blue-500 navbar border flex justify-between items-center h-16 text-2xl sm:text-3xl">
+        <!-- Site title -->
         <p class="ml-5 text-white">Buy / Sells Corner</p>
-        <img src="./image/og_infinix_logo.png" class="w-[6%] mr-[10px] rounded-full" alt="">
+        <div>
+            <!-- Shopping bag icon -->
+            <i class="fa-solid fa-bag-shopping text-white mr-5"></i>
+            <!-- Avatar image -->
+            <div class="avatar">
+                <div class="w-10 rounded-full">
+                    <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="no img" class="w-[4%]" />
+                </div>
+            </div>
+        </div>
     </div>
+
+    <!-- Container for the product section -->
+    <div class="rounded w-[90%] border border-gray-300 mb-7 mt-7 m-auto bg-[#FFF6F6] ">
+        <!-- Search bar -->
+        <label class="input w-[90%] h-[50px] m-auto mt-5 input-bordered flex items-center gap-5">
+            <!-- Search icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4 opacity-70">
+                <path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd" />
+            </svg>
+            <!-- Input field for search -->
+            <input type="text" class="grow" placeholder="Search" />
+        </label>
+        <!-- Section title -->
+        <h2 class="text-4xl mt-[50px] mb-[50px] ml-[50px] font-semibold">Product</h2>
+        <!-- Container for product cards -->
+        <div class="flex-wrap mb-7 flex justify-evenly items-center gap-5">
+            <!-- Product card -->
+            <div class="card card-compact bg-base-100 w-[300px] xl:w-[500px] h-[300px] sm:h-[530px] shadow-xl">
+                <!-- Product image -->
+                <figure>
+                    <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp" alt="Shoes" />
+                </figure>
+                <!-- Card content -->
+                <div class="card-body">
+                    <h2 class="card-title">Shoes!</h2>
+                    <p>If a dog chews shoes whose shoes does he choose?</p>
+                    <div class="card-actions justify-end">
+                        <!-- Buy Now button -->
+                        <button class="btn btn-primary">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Repeat of the product card -->
+            <div class="card card-compact bg-base-100 w-[300px] xl:w-[500px] h-[300px] sm:h-[530px] shadow-xl">
+                <figure>
+                    <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp" alt="Shoes" />
+                </figure>
+                <div class="card-body">
+                    <h2 class="card-title">Shoes!</h2>
+                    <p>If a dog chews shoes whose shoes does he choose?</p>
+                    <div class="card-actions justify-end">
+                        <button class="btn btn-primary">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Additional row of product cards -->
+        <div class="flex-wrap flex justify-evenly items-center gap-5 mb-[20px]">
+            <div class="card card-compact bg-base-100 w-[300px] xl:w-[500px] h-[300px] sm:h-[530px] shadow-xl">
+                <figure>
+                    <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp" alt="Shoes" />
+                </figure>
+                <div class="card-body">
+                    <h2 class="card-title">Shoes!</h2>
+                    <p>If a dog chews shoes whose shoes does he choose?</p>
+                    <div class="card-actions justify-end">
+                        <button class="btn btn-primary">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-compact bg-base-100 w-[300px] xl:w-[500px] h-[300px] sm:h-[530px] shadow-xl">
+                <figure>
+                    <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp" alt="Shoes" />
+                </figure>
+                <div class="card-body">
+                    <h2 class="card-title">Shoes!</h2>
+                    <p>If a dog chews shoes whose shoes does he choose?</p>
+                    <div class="card-actions justify-end">
+                        <button class="btn btn-primary">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Tailwind CSS script -->
     <script src="https://cdn.tailwindcss.com"></script>
 </body>
 
