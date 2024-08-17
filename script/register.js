@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
-import { auth } from "./config.js";
+import { auth } from "../config.js";
 
 
 let form = document.querySelector('#form');
@@ -15,7 +15,7 @@ form.addEventListener('submit', event => {
             const user = userCredential.user;
             alert('You are registered');
             console.log(user);
-            window.location = `index.html`;
+            window.location = `../login.html`;
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -26,7 +26,7 @@ form.addEventListener('submit', event => {
             } else {
                 alert(errorMessage);
             }
-            email.value = '';
-            password.value = '';
+            // email.value = '';
+            // password.value = '';
         });
 });
