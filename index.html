@@ -4,51 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>home</title>
-    <!-- General CSS Reset -->
+    <title>products</title>
     <style>
+        /* Reset margins and padding for all elements, and use border-box sizing */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
-        /* Styling for the photo upload container */
-        .div-photo {
-            position: relative;
-        }
-
-        /* Styling for the icon inside the photo upload container */
-        .imageInDiv {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-40%, -60%) !important;
-            cursor: pointer;
-        }
-
-        /* Hides the file input but keeps it functional */
-        input[type="file"] {
-            position: absolute;
-            top: 0;
-            left: 0;
-            cursor: pointer;
-        }
-
-        /* Custom class for bold placeholder text */
-        .placeholder-bold::placeholder {
-            font-weight: 600;
-        }
     </style>
-    <!-- Importing DaisyUI library for additional styles -->
+    <!-- Link to DaisyUI for styling -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <!-- FontAwesome link for icons -->
+    <script src="https://kit.fontawesome.com/c168b7d2e2.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <!-- Navbar with logo and title -->
     <div class="navbar bg-[#4C68FF]">
         <div class="flex-1">
-            <a class="btn btn-ghost text-xl text-white text-2xl sm:text-3xl">daisyUI</a>
+            <a class="btn btn-ghost text-xl text-white text-2xl sm:text-3xl">Buy / Sells Corner</a>
         </div>
         <div class="flex-none">
             <div class="dropdown dropdown-end">
@@ -83,44 +58,84 @@
             </div>
         </div>
     </div>
-    <!-- Main heading for the page -->
-    <h1 class="text-3xl text-center mt-8 font-semibold sm:text-4xl mb-2">Post AD</h1>
-    <!-- Photo upload container -->
-    <div
-        class="border w-[91%] m-auto flex flex-wrap justify-center items-center bg-[#4C68FF] h-[270px] sm:h-[373px] rounded sm:rounded-none border-gray-300 div-photo">
-        <!-- Hidden file input for photo upload -->
-        <input type="file" id="file-input" class="opacity-0 absolute h-full w-full">
-        <!-- Plus icon to trigger the file input click -->
-        <img src="./image/Plus_rectangle.png" class="w-[35%] sm:w-[17%] imageInDiv"
-            onclick="document.getElementById('file-input').click()" alt="">
-        <!-- Instruction text for uploading a photo -->
-        <div class="text-white mt-[13rem]  text-[1.5rem]">Upload product photo</div>
-    </div>
-    <!-- Input fields for ad details -->
-    <form id="form" class="">
-        <input type="text"
-            class="w-[91%] m-auto placeholder-bold mt-5 ml-[4.4%] rounded m-auto border-gray-300 border p-[8px]" name=""
-            placeholder="Product title" id="">
-        <input type="text"
-            class="w-[91%] m-auto placeholder-bold mt-5 ml-[4.4%] rounded m-auto border-gray-300 border p-[8px]" name=""
-            placeholder="PD     Production Description" id="">
-        <input type="number"
-            class="w-[91%] m-auto mt-5 ml-[4.4%] rounded border-gray-300 border p-[8px] placeholder-bold" name=""
-            placeholder="RS     Enter Price" id="">
-        <input type="text" class="w-[91%] m-auto mt-5 ml-[4.4%] border-gray-300 border p-[8px] placeholder-bold" name=""
-            placeholder="Enter name" id="">
-        <input type="number" class="mb-[10px] w-[91%] m-auto ml-[4.4%] border-gray-300 border p-[8px] placeholder-bold"
-            name="" placeholder="Enter your number" id="">
-        <div class="flex flex-wrap justify-end m-[30px] mr-[4%] items-center">
-            <button type="submit"
-                class=" text-white bg-[#4C68FF] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 text-[0.8rem] sm:text-[1.2rem]">AD
-                Post</button>
+
+    <!-- Container for the product section -->
+    <div class="rounded w-[90%] border border-gray-300 mb-7 mt-7 m-auto bg-[#FFF6F6] ">
+        <!-- Search bar -->
+        <label class="input w-[90%] h-[50px] m-auto mt-5 input-bordered flex items-center gap-5">
+            <!-- Search icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4 opacity-70">
+                <path fill-rule="evenodd"
+                    d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                    clip-rule="evenodd" />
+            </svg>
+            <!-- Input field for search -->
+            <input type="text" class="grow" placeholder="Search" />
+        </label>
+        <!-- Section title -->
+        <h2 class="text-4xl mt-[50px] mb-[50px] ml-[50px] font-semibold">Product</h2>
+        <!-- Container for product cards -->
+        <div class="flex-wrap mb-7 flex justify-evenly items-center gap-5">
+            <!-- Product card -->
+            <div class="card card-compact bg-base-100 w-[300px] xl:w-[500px] h-[300px] sm:h-[530px] shadow-xl">
+                <!-- Product image -->
+                <figure>
+                    <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp" alt="Shoes" />
+                </figure>
+                <!-- Card content -->
+                <div class="card-body">
+                    <h2 class="card-title">Shoes!</h2>
+                    <p>If a dog chews shoes whose shoes does he choose?</p>
+                    <div class="card-actions justify-end">
+                        <!-- Buy Now button -->
+                        <button class="btn btn-primary">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Repeat of the product card -->
+            <div class="card card-compact bg-base-100 w-[300px] xl:w-[500px] h-[300px] sm:h-[530px] shadow-xl">
+                <figure>
+                    <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp" alt="Shoes" />
+                </figure>
+                <div class="card-body">
+                    <h2 class="card-title">Shoes!</h2>
+                    <p>If a dog chews shoes whose shoes does he choose?</p>
+                    <div class="card-actions justify-end">
+                        <button class="btn btn-primary">Buy Now</button>
+                    </div>
+                </div>
+            </div>
         </div>
-    </form>
-    <!-- <button class="button">logout</button> -->
-    <!-- Importing JavaScript module for additional functionality -->
-    <script type="module" src="./script/app.js"></script>
-    <!-- Importing TailwindCSS library -->
+        <!-- Additional row of product cards -->
+        <div class="flex-wrap flex justify-evenly items-center gap-5 mb-[20px]">
+            <div class="card card-compact bg-base-100 w-[300px] xl:w-[500px] h-[300px] sm:h-[530px] shadow-xl">
+                <figure>
+                    <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp" alt="Shoes" />
+                </figure>
+                <div class="card-body">
+                    <h2 class="card-title">Shoes!</h2>
+                    <p>If a dog chews shoes whose shoes does he choose?</p>
+                    <div class="card-actions justify-end">
+                        <button class="btn btn-primary">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-compact bg-base-100 w-[300px] xl:w-[500px] h-[300px] sm:h-[530px] shadow-xl">
+                <figure>
+                    <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp" alt="Shoes" />
+                </figure>
+                <div class="card-body">
+                    <h2 class="card-title">Shoes!</h2>
+                    <p>If a dog chews shoes whose shoes does he choose?</p>
+                    <div class="card-actions justify-end">
+                        <button class="btn btn-primary">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Tailwind CSS script -->
+     <script type="module" src="./script/app.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 </body>
 
