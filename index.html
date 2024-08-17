@@ -21,23 +21,19 @@
 
 <body>
     <!-- Navbar with logo and title -->
+
     <div class="navbar bg-[#4C68FF]">
         <div class="flex-1">
             <a class="btn btn-ghost text-xl text-white text-2xl sm:text-3xl">Buy / Sells Corner</a>
         </div>
         <div class="flex-none">
-            <div class="dropdown dropdown-end">
-                <div tabindex="0" class="card card-compact dropdown-content bg-base-100 z-[1] mt-3 w-52 shadow">
-                    <div class="card-body">
-                        <span class="text-lg font-bold">8 Items</span>
-                        <span class="text-info">Subtotal: $999</span>
-                        <div class="card-actions">
-                            <button class="btn btn-primary btn-block">View cart</button>
-                        </div>
-                    </div>
-                </div>
+            <div class="dropdown dropdown-end flex justify-center items-center flex-wrap"  id="divLogin">
+                <a href="./login.html">
+                    <button
+                        class=" text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Login</button>
+                </a>
             </div>
-            <div class="dropdown dropdown-end">
+            <!-- <div class="dropdown dropdown-end">
                 <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
                     <div class="w-10 rounded-full">
                         <img alt="Tailwind CSS Navbar component"
@@ -53,12 +49,25 @@
                         </a>
                     </li>
                     <li><a>Settings</a></li>
-                    <li><a>Logout</a></li>
+                    <li><a class="button">Logout</a></li>
                 </ul>
-            </div>
+            </div> -->
         </div>
     </div>
 
+
+    <!-- <div class="navbar bg-[#4C68FF]">
+        <div class="flex-1">
+            <a class="btn btn-ghost text-xl text-white text-2xl sm:text-3xl">Buy / Sells Corner</a>
+        </div>
+        <div class="flex-none">
+            <div class="dropdown  dropdown-end " id="divLogin">
+                <button type="submit"
+                    class=" text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Login</button>
+            </div>
+        </div>
+    </div> -->
+    <!-- <a href="./login.html">Login</a> -->
     <!-- Container for the product section -->
     <div class="rounded w-[90%] border border-gray-300 mb-7 mt-7 m-auto bg-[#FFF6F6] ">
         <!-- Search bar -->
@@ -135,7 +144,7 @@
         </div>
     </div>
     <!-- Tailwind CSS script -->
-     <script type="module" src="./script/app.js"></script>
+    <script type="module" src="./script/app.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 </body>
 

@@ -21,7 +21,7 @@ form.addEventListener('submit', event => {
             const user = userCredential.user;
             alert('You are logged in');
             console.log(user);
-            window.location = `../AddPost.html`;
+            window.location = `../index.html`;
         })
         .catch((error) => {
             const errorCode = error.code;
