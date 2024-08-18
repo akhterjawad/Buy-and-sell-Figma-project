@@ -16,7 +16,7 @@ let loginBtn = document.querySelector('#loginBtn');
 form.addEventListener('submit', event => {
     event.preventDefault();
     signInWithEmailAndPassword(auth, email.value, password.value)
-    .then((userCredential) => {
+        .then((userCredential) => {
             loginBtn.innerHTML = `<img class="loading" src="./image/loading.gif" alt="no img">`
             const user = userCredential.user;
             Swal.fire({

@@ -46,7 +46,7 @@ form.addEventListener('submit', async event => {
     event.preventDefault();
     registerBtn.innerHTML = `<img class="loading" src="./image/loading.gif" alt="no img">`
     let userimageurl = await showUrl(userimage);
-    if (email.value === '' || password.value === '' || firstname.value === '' || lastname.value === '') {
+    if (email.value === '' || password.value === '' || firstname.value === '' || lastname.value === '' || !userimage.files.length) {
         alert('Please fill in the input fields');
         return;
     }
@@ -67,13 +67,29 @@ form.addEventListener('submit', async event => {
         array.push({
             firstname: firstname.value,
             lastname: lastname.value
-        });
+        })
+        Swal.fire({
+            title: 'Success!',
+            text: 'Your account registered successfully!',
+            icon: 'success',
+            confirmButtonText: 'Login'
+        })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    window.location = "../login.html";
+                }
+            });
 
-        alert('You are registered');
-        window.location = '../login.html';
+        // alert('You are registered');
+        // window.location = '../login.html';
     } catch (error) {
         console.error("Error during registration: ", error);
-        alert(error.message);
+        Swal.fire({
+            title: 'Error!',
+            text: error.message,
+            icon: 'error',
+            confirmButtonText: 'Try Again'
+        });
         // email.value = '';
         // password.value = '';
         // firstname.value = '';

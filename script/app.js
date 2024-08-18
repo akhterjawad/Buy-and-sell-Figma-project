@@ -38,7 +38,7 @@ async function GetDataFromFirestore() {
                 array.push(doc.data());
                 console.log(array);
                 console.log(doc.data());
-                loginBtn.innerHTML = `${doc.data().firstname} ${doc.data().lastname }<div class="dropdown dropdown-end">
+                loginBtn.innerHTML = `${doc.data().firstname} ${doc.data().lastname}<div class="dropdown dropdown-end">
                 <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
                     <div class="w-10 rounded-full">
                         <img alt="Tailwind CSS Navbar component"
