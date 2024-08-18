@@ -21,6 +21,7 @@ let email = document.querySelector('#email');
 let firstname = document.querySelector('#firstname');
 let lastname = document.querySelector('#lastname');
 let password = document.querySelector('#password');
+let registerBtn = document.querySelector('#registerBtn');
 let userimage = document.querySelector('#userimage');
 
 // onAuthStateChanged(auth, (user) => {
@@ -43,6 +44,7 @@ let array = [];
 
 form.addEventListener('submit', async event => {
     event.preventDefault();
+    registerBtn.innerHTML = `<img class="loading" src="./image/loading.gif" alt="no img">`
     let userimageurl = await showUrl(userimage);
     if (email.value === '' || password.value === '' || firstname.value === '' || lastname.value === '') {
         alert('Please fill in the input fields');
@@ -77,25 +79,24 @@ form.addEventListener('submit', async event => {
         // firstname.value = '';
         // lastname.value = '';
     }
-
-
+    registerBtn.innerHTML = `Register`;
 });
 
 
 async function showUrl(profile) {
     const files = profile.files[0]
-    const storageRef =  ref(storage, email.value);
-  
-  
+    const storageRef = ref(storage, email.value);
+
+
     try {
         const uplordimage = await uploadBytes(storageRef, files);
         const url = await getDownloadURL(storageRef);
         console.log(url);
         return url
-      
+
     } catch (error) {
-      console.log(error);
-      
+        console.log(error);
+
     }
-      
-  }
+
+}

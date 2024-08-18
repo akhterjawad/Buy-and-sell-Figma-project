@@ -11,27 +11,37 @@ let form = document.querySelector('#form');
 let email = document.querySelector('#email');
 let password = document.querySelector('#password');
 let googleBtn = document.querySelector('.googlelogin');
-
+let loginBtn = document.querySelector('#loginBtn');
 
 form.addEventListener('submit', event => {
     event.preventDefault();
     signInWithEmailAndPassword(auth, email.value, password.value)
-        .then((userCredential) => {
-            // Signed in 
+    .then((userCredential) => {
+            loginBtn.innerHTML = `<img class="loading" src="./image/loading.gif" alt="no img">`
             const user = userCredential.user;
-            alert('You are logged in');
-            console.log(user);
-            window.location = `../index.html`;
+            Swal.fire({
+                title: 'Success!',
+                text: 'You are logged in successfully',
+                icon: 'success',
+                confirmButtonText: 'Login'
+            })
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        window.location = '../index.html';
+                    }
+                });
         })
         .catch((error) => {
-            const errorCode = error.code;
             const errorMessage = error.message;
-            console.log(errorMessage);
-            alert(errorMessage);
-            // email.value = '';
-            // password.value = '';
+            Swal.fire({
+                title: 'Error!',
+                text: errorMessage,
+                icon: 'error',
+                confirmButtonText: 'Try Again'
+            });
         });
 });
+
 
 // googleBtn.addEventListener(`click`, () => {
 //     signInWithPopup(auth, provider)
