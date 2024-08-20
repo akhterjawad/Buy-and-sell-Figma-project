@@ -15,9 +15,9 @@ let loginBtn = document.querySelector('#loginBtn');
 
 form.addEventListener('submit', event => {
     event.preventDefault();
+    loginBtn.innerHTML = `<img class="loading" src="./image/loading.gif" alt="no img">`
     signInWithEmailAndPassword(auth, email.value, password.value)
         .then((userCredential) => {
-            loginBtn.innerHTML = `<img class="loading" src="./image/loading.gif" alt="no img">`
             const user = userCredential.user;
             Swal.fire({
                 title: 'Success!',
@@ -40,6 +40,7 @@ form.addEventListener('submit', event => {
                 confirmButtonText: 'Try Again'
             });
         });
+        loginBtn.innerHTML = `Login`
 });
 
 
