@@ -89,13 +89,14 @@
         <input required type="number" minlength="11" class="mb-[10px] w-[91%] m-auto ml-[4.4%] border-gray-300 border p-[8px] placeholder-bold"
             name="" placeholder="Enter your number" id="yourNumber">
         <div class="flex flex-wrap justify-end m-[30px] mr-[4%] items-center">
-            <button type="submit"
+            <button type="submit" id="addBtn"
                 class=" text-white bg-[#4C68FF] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 text-[0.8rem] sm:text-[1.2rem]">AD
                 Post</button>
         </div>
     </form>
     <!-- Importing JavaScript module for additional functionality -->
     <script type="module" src="./script/addpost.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.all.min.js"></script>
     <!-- Importing TailwindCSS library -->
     <script src="https://cdn.tailwindcss.com"></script>
 </body>

@@ -26,6 +26,7 @@ let productdprice = document.querySelector(`#price`);
 let ownername = document.querySelector(`#yourName`);
 let ownernumber = document.querySelector(`#yourNumber`);
 let logoutButton = document.querySelector(`#button`);
+let addBtn = document.querySelector(`#addBtn`);
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
@@ -96,45 +97,90 @@ async function showUrl(file) {
 // let allproducts = []
 form.addEventListener('submit', async (event) => {
   event.preventDefault()
-  console.log(productTitle.value);
-  console.log(ProductionDescription.value);
-  console.log(productdprice.value);
-  console.log(ownername.value);
-  console.log(ownernumber.value);
-  let userimageurl = await showUrl(file)
-  console.log(userimageurl);
-  adddata()
+  addBtn.innerHTML = `<img class="loading" src="./image/loading.gif" alt="no img">`
 
-
-  async function adddata() {
-
-    try {
-      const docRef = await addDoc(collection(db, "userproducts"), {
-        ownername: ownername.value,
-        ownernumber: ownernumber.value,
-        productTitle: productTitle.value,
-        ProductionDescription: ProductionDescription.value,
-        productdprice: productdprice.value,
-        productdimage: userimageurl
-
-      });
-      console.log("Document written with ID: ", docRef.id);
-      //   window.location = 'i.html'
-      alert('your product add')
-
-
-    } catch (e) {
-      console.log("Error adding document: ", e);
+  if (
+    productTitle.value === `` || 
+    ProductionDescription.value === `` || 
+    productdprice.value === `` || 
+    ownername.value === `` || 
+    ownernumber.value === `` || 
+    !file
+  ) {
+    alert(`please reload your page because you did not fill these input fields`);
+    return; // Prevent further execution if validation fails
+  } 
+  function replaceFirstDigitWithCode(number) {
+    // Convert the number to a string
+    let numberStr = number.toString();
+    // Check if the number already starts with '+92'
+    if (numberStr.startsWith("+92")) {
+      return numberStr; // No need to change anything
     }
+    // Replace the first digit with '+92'
+    let modifiedOwnerNumber = "+92" + numberStr.slice(1);
+    return modifiedOwnerNumber;
   }
+  // Example usage:
+   ownernumber.value // Replace with any number
+  let modifiedOwnerNumber = replaceFirstDigitWithCode(ownernumber.value);
+  console.log(modifiedOwnerNumber); // Output will be '+923012345678'
+  
+console.log(productTitle.value);
+console.log(ProductionDescription.value);
+console.log(productdprice.value);
+console.log(ownername.value);
+console.log(ownernumber.value);
+console.log(modifiedOwnerNumber);
+let userimageurl = await showUrl(file)
+console.log(userimageurl);
+adddata()
 
 
-  ownername.value = ""
-  ownernumber.value = ""
-  productTitle.value = ""
-  ProductionDescription.value = ""
-  productdprice.value = ""
-  file = ""
-  document.querySelector('#productimage').src = '../image/Plus_rectangle.png"';
+async function adddata() {
+
+  try {
+    const docRef = await addDoc(collection(db, "userproducts"), {
+      ownername: ownername.value,
+      ownernumber: ownernumber.value,
+      productTitle: productTitle.value,
+      ProductionDescription: ProductionDescription.value,
+      productdprice: productdprice.value,
+      productdimage: userimageurl
+
+    });
+    Swal.fire({
+      title: 'Success!',
+      text: 'Your product is added',
+      icon: 'success',
+      confirmButtonText: 'added'
+    })
+      .then((result) => {
+        if (result.isConfirmed) {
+          console.log("Document written with ID: ", docRef.id);
+        }
+      });
+
+
+  } catch (e) {
+    console.log("Error adding document: ", e);
+    Swal.fire({
+      title: 'Error!',
+      text: e,
+      icon: 'error',  
+      confirmButtonText: 'Try Again'
+    });
+  }
+  addBtn.innerHTML = `AD Post`
+}
+
+
+ownername.value = ""
+ownernumber.value = ""
+productTitle.value = ""
+ProductionDescription.value = ""
+productdprice.value = ""
+file = ""
+document.querySelector('#productimage').src = '../image/Plus_rectangle.png"';
 
 })

@@ -46,7 +46,7 @@ form.addEventListener('submit', async event => {
     event.preventDefault();
     registerBtn.innerHTML = `<img class="loading" src="./image/loading.gif" alt="no img">`
     let userimageurl = await showUrl(userimage);
-    if (email.value === '' || password.value === '' || firstname.value === '' || lastname.value === '' || !userimage.files.length) {
+    if (email.value === '' && password.value === '' && firstname.value === '' && lastname.value === '' && !userimage.files.length) {
         alert('Please fill in the input fields');
         return;
     }
