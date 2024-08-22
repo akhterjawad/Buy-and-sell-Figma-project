@@ -27,28 +27,69 @@ let productdprice = document.querySelector(`#price`);
 let ownername = document.querySelector(`#yourName`); 
 let ownernumber = document.querySelector(`#yourNumber`);
 let logoutButton = document.querySelector(`#button`); 
-let addBtn = document.querySelector(`#addBtn`); 
+let addBtn = document.querySelector(`#addBtn`);
+let loginBtn = document.querySelector('#divLogin');
+let usersDataArray = [];
+
 
 // Monitor the authentication state of the user
 onAuthStateChanged(auth, (user) => {
-  if (user) {
-    uid = user.uid;
-    console.log(uid);
-  } else {
-    console.log(`User is signed out`);
-    window.location = `../login.html`;
-  }
+    if (user) {
+        uid = user.uid;
+        console.log(uid);
+        loginBtn.innerHTML=''
+    } else {
+        console.log(`User is signed out`);
+        window.location = `../login.html`;
+    }
 });
 
-// Event listener for the logout button
-logoutButton.addEventListener('click', () => {
-  signOut(auth).then(() => {
-    console.log(`Sign-out successful.`);
-    window.location = `../login.html`;
-  }).catch((error) => {
-    console.log(error);
-  });
-});
+async function GetUserDataFromFirestore() {
+    try {
+        const querySnapshot = await getDocs(collection(db, "users"));
+        querySnapshot.forEach((doc) => {
+                usersDataArray.push(doc.data());
+                console.log(usersDataArray);
+                console.log(doc.data());
+                loginBtn.innerHTML = `${doc.data().firstname} ${doc.data().lastname }<div class="dropdown dropdown-end">
+                <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                    <div class="w-10 rounded-full">
+                        <img alt="Tailwind CSS Navbar component"
+                            src="${doc.data().userimage}"/>
+                    </div>
+                </div>
+                <ul tabindex="0"
+                    class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                    <li>
+                        <a class="justify-between" href="./index.html">
+                            Home
+                            <span class="badge">New</span>
+                        </a>
+                    </li>
+                    <li><a>Settings</a></li>
+                    <li><a id="button" class="button ">Logout</a></li>
+                </ul>
+            </div>`;
+            logoutButton = document.querySelector('#button');
+        });
+        Logout()
+    } catch (error) {
+        console.log("Error getting documents: ", error);
+    }
+};
+function Logout() {
+    logoutButton.addEventListener('click', () => {
+        signOut(auth).then(() => {
+            console.log(`Sign-out successful.`);
+            window.location = `../login.html`;
+        }).catch((error) => {
+            // An error happened.
+            console.log(error);
+        });
+    });
+};
+GetUserDataFromFirestore();
+
 
 // Trigger file input when product image is clicked
 productimage.addEventListener('click', function () {

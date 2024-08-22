@@ -10,10 +10,10 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 import { auth, db } from "../config.js";
 let loginBtn = document.querySelector('#divLogin');
-let productscards = document.querySelector('#productscards')
+let usersDataArray = [];
 let uid;
 let logoutButton;
-let usersDataArray = [];
+let productscards = document.querySelector('#productscards')
 let allproducts = [];
 onAuthStateChanged(auth, (user) => {
     if (user) {
