@@ -30,6 +30,7 @@ onAuthStateChanged(auth, (user) => {
         loginBtn.innerHTML=''
     } else {
         console.log(`User is signed out`);
+        alert('please login first then you can buy')
         window.location = `../login.html`;
     }
 });

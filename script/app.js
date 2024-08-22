@@ -129,7 +129,7 @@ async function renderproducts(allProductsArray) {
                 localStorage.setItem('products', JSON.stringify([productCard]));
 
                 // Redirect to the single product screen (if necessary)
-                window.location = "../singleProductScreen.js";
+                window.location = "../SingleProductScreen.html";
             } else {
                 console.error('Product not found!');
             }
