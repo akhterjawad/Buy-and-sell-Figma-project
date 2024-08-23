@@ -5,11 +5,11 @@ import {
     query,
     where
 } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
-import {
-    uploadBytes,
-    getDownloadURL,
-    ref,
-} from "https://www.gstatic.com/firebasejs/10.12.4/firebase-storage.js";
+// import {
+//     uploadBytes,
+//     getDownloadURL,
+//     ref,
+// } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-storage.js";
 import {
     onAuthStateChanged,
     signOut
@@ -24,33 +24,31 @@ let productTitleh2 = document.querySelector('#productTitle');
 // let addToCart = document.querySelector('#addToCart');
 let usersDataArray = [];
 let productarray = JSON.parse(localStorage.getItem('products'));
-
-console.log(productarray);
+let isLoggingOut = false; // Flag to indicate if the user is logging out
 
 // Monitor the authentication state of the user
 onAuthStateChanged(auth, (user) => {
-    if (user) {
-        uid = user.uid;
-        console.log(uid);
-        loginBtn.innerHTML = ''
-    } else {
-        console.log(`User is signed out`);
-        alert('please login first then you can buy')
-        window.location = `../login.html`;
-    }
+  if (user) {
+    uid = user.uid;
+    console.log(uid);
+    loginBtn.innerHTML = ''
+  } else if (!isLoggingOut) { // Check if the user is not logging out
+    console.log(`User is signed out`);
+    alert(`Please login first then you can see a add`);
+    window.location = `../login.html`;
+  }
 });
-
-
-
 
 
 async function GetUserDataFromFirestore() {
     try {
         const querySnapshot = await getDocs(collection(db, "users"));
         querySnapshot.forEach((doc) => {
-            usersDataArray.push(doc.data());
-            console.log(doc.data());
-            loginBtn.innerHTML = `${doc.data().firstname} ${doc.data().lastname}<div class="dropdown dropdown-end">
+            if (doc.data().Uid===uid) {
+                
+                usersDataArray.push(doc.data());
+                console.log(doc.data());
+                loginBtn.innerHTML = `<p class="text-white text-[0.7rem] sm:text-[1rem]">${doc.data().firstname} ${doc.data().lastname}</p> <div class="dropdown dropdown-end">
                 <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
                     <div class="w-10 rounded-full">
                         <img alt="Tailwind CSS Navbar component"
@@ -65,10 +63,11 @@ async function GetUserDataFromFirestore() {
                             <span class="badge">New</span>
                         </a>
                     </li>
-                    <li><a>Settings</a></li>
+                    <li><a class="justify-between" href="./index.html">Home</a></li>
                     <li><a id="button" class="button ">Logout</a></li>
-                </ul>
-            </div>`;
+                    </ul>
+                    </div>`;
+                    }
             logoutButton = document.querySelector('#button');
         });
         Logout()
@@ -78,15 +77,16 @@ async function GetUserDataFromFirestore() {
 };
 function Logout() {
     logoutButton.addEventListener('click', () => {
-        signOut(auth).then(() => {
-            console.log(`Sign-out successful.`);
-            window.location = `../login.html`;
-        }).catch((error) => {
-            // An error happened.
-            console.log(error);
-        });
+      isLoggingOut = true; // Set the flag to true when logging out
+      signOut(auth).then(() => {
+        console.log(`Sign-out successful.`);
+        window.location = `../login.html`;
+      }).catch((error) => {
+        // An error happened.
+        console.log(error);
+      });
     });
-};
+  };
 GetUserDataFromFirestore();
 productTitleh2.innerHTML=productarray[0].productTitle
 function rander() {

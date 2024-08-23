@@ -10,7 +10,6 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 import { auth, db } from "../config.js";
 let loginBtn = document.querySelector('#divLogin');
-let usersDataallProductsArray = [];
 let uid;
 let logoutButton;
 let productscards = document.querySelector('#productscards')
@@ -36,11 +35,12 @@ async function GetUserDataFromFirestore() {
     try {
         const querySnapshot = await getDocs(collection(db, "users"));
         querySnapshot.forEach((doc) => {
+            let usersDataArray = [];
             if (doc.data().Uid === uid) {
-                usersDataallProductsArray.push(doc.data());
-                console.log(usersDataallProductsArray);
+                usersDataArray.push(doc.data());
+                console.log(usersDataArray);
                 console.log(doc.data());
-                loginBtn.innerHTML = `${doc.data().firstname} ${doc.data().lastname}<div class="dropdown dropdown-end">
+                loginBtn.innerHTML = `<p class="text-white text-[0.7rem] sm:text-[1rem]">${doc.data().firstname} ${doc.data().lastname}</p> <div class="dropdown dropdown-end">
                 <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
                     <div class="w-10 rounded-full">
                         <img alt="Tailwind CSS Navbar component"
@@ -67,7 +67,7 @@ async function GetUserDataFromFirestore() {
         console.log("Error getting documents: ", error);
     }
 };
-function Logout() {
+ function Logout() {
     logoutButton.addEventListener('click', () => {
         signOut(auth).then(() => {
             console.log(`Sign-out successful.`);

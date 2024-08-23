@@ -26,11 +26,11 @@ let ProductionDescription = document.querySelector(`#ProductionDescription`);
 let productdprice = document.querySelector(`#price`);
 let ownername = document.querySelector(`#yourName`);
 let ownernumber = document.querySelector(`#yourNumber`);
-let logoutButton = document.querySelector(`#button`);
+let logoutButton;
 let addBtn = document.querySelector(`#addBtn`);
 let loginBtn = document.querySelector('#divLogin');
 let usersDataArray = [];
-
+let isLoggingOut = false; // Flag to indicate if the user is logging out
 
 // Monitor the authentication state of the user
 onAuthStateChanged(auth, (user) => {
@@ -38,48 +38,51 @@ onAuthStateChanged(auth, (user) => {
     uid = user.uid;
     console.log(uid);
     loginBtn.innerHTML = ''
-  } else {
+  } else if (!isLoggingOut) { // Check if the user is not logging out
     console.log(`User is signed out`);
-    alert(`please login first then you post a add`)
+    alert(`Please login first then you can add a post`);
     window.location = `../login.html`;
   }
 });
 
 async function GetUserDataFromFirestore() {
   try {
-    const querySnapshot = await getDocs(collection(db, "users"));
-    querySnapshot.forEach((doc) => {
-      usersDataArray.push(doc.data());
-      console.log(usersDataArray);
-      console.log(doc.data());
-      loginBtn.innerHTML = `${doc.data().firstname} ${doc.data().lastname}<div class="dropdown dropdown-end">
-                <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-                    <div class="w-10 rounded-full">
-                        <img alt="Tailwind CSS Navbar component"
-                            src="${doc.data().userimage}"/>
-                    </div>
-                </div>
-                <ul tabindex="0"
-                    class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                    <li>
-                        <a class="justify-between" href="./index.html">
-                            Home
-                            <span class="badge">New</span>
-                        </a>
-                    </li>
-                    <li><a>Settings</a></li>
-                    <li><a id="button" class="button ">Logout</a></li>
-                </ul>
-            </div>`;
-      logoutButton = document.querySelector('#button');
-    });
-    Logout()
+      const querySnapshot = await getDocs(collection(db, "users"));
+      querySnapshot.forEach((doc) => {
+          if (doc.data().Uid === uid) {
+              usersDataArray.push(doc.data());
+              console.log(usersDataArray);
+              console.log(doc.data());
+              loginBtn.innerHTML = `<p class="text-white text-[0.7rem] sm:text-[1rem]">${doc.data().firstname} ${doc.data().lastname}</p> <div class="dropdown dropdown-end">
+              <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                  <div class="w-10 rounded-full">
+                      <img alt="Tailwind CSS Navbar component"
+                          src="${doc.data().userimage}"/>
+                  </div>
+              </div>
+              <ul tabindex="0"
+                  class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                  <li>
+                      <a class="justify-between" href="./index.html">
+                          Home
+                          <span class="badge">New</span>
+                      </a>
+                  </li>
+                  <li><a>Settings</a></li>
+                  <li><a id="button" class="button ">Logout</a></li>
+              </ul>
+          </div>`;
+          }
+          logoutButton = document.querySelector('#button');
+      });
+      Logout()
   } catch (error) {
-    console.log("Error getting documents: ", error);
+      console.log("Error getting documents: ", error);
   }
 };
 function Logout() {
   logoutButton.addEventListener('click', () => {
+    isLoggingOut = true; // Set the flag to true when logging out
     signOut(auth).then(() => {
       console.log(`Sign-out successful.`);
       window.location = `../login.html`;
