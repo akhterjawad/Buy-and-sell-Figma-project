@@ -23,10 +23,10 @@ let productimage = document.querySelector('#productimage'); // Select the produc
 let form = document.querySelector(`#form`);
 let productTitle = document.querySelector(`#productTitle`);
 let ProductionDescription = document.querySelector(`#ProductionDescription`);
-let productdprice = document.querySelector(`#price`); 
-let ownername = document.querySelector(`#yourName`); 
+let productdprice = document.querySelector(`#price`);
+let ownername = document.querySelector(`#yourName`);
 let ownernumber = document.querySelector(`#yourNumber`);
-let logoutButton = document.querySelector(`#button`); 
+let logoutButton = document.querySelector(`#button`);
 let addBtn = document.querySelector(`#addBtn`);
 let loginBtn = document.querySelector('#divLogin');
 let usersDataArray = [];
@@ -34,24 +34,25 @@ let usersDataArray = [];
 
 // Monitor the authentication state of the user
 onAuthStateChanged(auth, (user) => {
-    if (user) {
-        uid = user.uid;
-        console.log(uid);
-        loginBtn.innerHTML=''
-    } else {
-        console.log(`User is signed out`);
-        window.location = `../login.html`;
-    }
+  if (user) {
+    uid = user.uid;
+    console.log(uid);
+    loginBtn.innerHTML = ''
+  } else {
+    console.log(`User is signed out`);
+    alert(`please login first then you post a add`)
+    window.location = `../login.html`;
+  }
 });
 
 async function GetUserDataFromFirestore() {
-    try {
-        const querySnapshot = await getDocs(collection(db, "users"));
-        querySnapshot.forEach((doc) => {
-                usersDataArray.push(doc.data());
-                console.log(usersDataArray);
-                console.log(doc.data());
-                loginBtn.innerHTML = `${doc.data().firstname} ${doc.data().lastname }<div class="dropdown dropdown-end">
+  try {
+    const querySnapshot = await getDocs(collection(db, "users"));
+    querySnapshot.forEach((doc) => {
+      usersDataArray.push(doc.data());
+      console.log(usersDataArray);
+      console.log(doc.data());
+      loginBtn.innerHTML = `${doc.data().firstname} ${doc.data().lastname}<div class="dropdown dropdown-end">
                 <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
                     <div class="w-10 rounded-full">
                         <img alt="Tailwind CSS Navbar component"
@@ -70,23 +71,23 @@ async function GetUserDataFromFirestore() {
                     <li><a id="button" class="button ">Logout</a></li>
                 </ul>
             </div>`;
-            logoutButton = document.querySelector('#button');
-        });
-        Logout()
-    } catch (error) {
-        console.log("Error getting documents: ", error);
-    }
+      logoutButton = document.querySelector('#button');
+    });
+    Logout()
+  } catch (error) {
+    console.log("Error getting documents: ", error);
+  }
 };
 function Logout() {
-    logoutButton.addEventListener('click', () => {
-        signOut(auth).then(() => {
-            console.log(`Sign-out successful.`);
-            window.location = `../login.html`;
-        }).catch((error) => {
-            // An error happened.
-            console.log(error);
-        });
+  logoutButton.addEventListener('click', () => {
+    signOut(auth).then(() => {
+      console.log(`Sign-out successful.`);
+      window.location = `../login.html`;
+    }).catch((error) => {
+      // An error happened.
+      console.log(error);
     });
+  });
 };
 GetUserDataFromFirestore();
 
@@ -100,7 +101,7 @@ let file; // Variable to store the selected file
 
 let fileInput = document.getElementById('fileInput'); // Select the file input element
 fileInput.addEventListener('change', function (event) {
-  file = event.target.files[0]; 
+  file = event.target.files[0];
   if (file) {
     const reader = new FileReader();
     reader.onload = function (e) {
@@ -152,7 +153,7 @@ form.addEventListener('submit', async (event) => {
     let modifiedOwnerNumber = "+92" + numberStr.slice(1);
     return modifiedOwnerNumber;
   }
-  let modifiedOwnerNumber = replaceFirstDigitWithCode(ownernumber.value); 
+  let modifiedOwnerNumber = replaceFirstDigitWithCode(ownernumber.value);
   console.log(modifiedOwnerNumber);
 
   let userimageurl = await showUrl(file); // Upload the image and get the URL
@@ -169,7 +170,8 @@ form.addEventListener('submit', async (event) => {
         productTitle: productTitle.value,
         ProductionDescription: ProductionDescription.value,
         productdprice: productdprice.value,
-        productdimage: userimageurl
+        productdimage: userimageurl,
+        usersDataArray
       });
 
       Swal.fire({

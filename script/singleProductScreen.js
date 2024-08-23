@@ -20,17 +20,19 @@ let uid; // Variable to store the user's unique ID
 let logoutButton;
 let loginBtn = document.querySelector('#divLogin');
 let randerDiv = document.querySelector('#randerDiv');
+let productTitleh2 = document.querySelector('#productTitle');
 // let addToCart = document.querySelector('#addToCart');
 let usersDataArray = [];
 let productarray = JSON.parse(localStorage.getItem('products'));
 
+console.log(productarray);
 
 // Monitor the authentication state of the user
 onAuthStateChanged(auth, (user) => {
     if (user) {
         uid = user.uid;
         console.log(uid);
-        loginBtn.innerHTML=''
+        loginBtn.innerHTML = ''
     } else {
         console.log(`User is signed out`);
         alert('please login first then you can buy')
@@ -46,10 +48,9 @@ async function GetUserDataFromFirestore() {
     try {
         const querySnapshot = await getDocs(collection(db, "users"));
         querySnapshot.forEach((doc) => {
-                usersDataArray.push(doc.data());
-                console.log(usersDataArray);
-                console.log(doc.data());
-                loginBtn.innerHTML = `${doc.data().firstname} ${doc.data().lastname }<div class="dropdown dropdown-end">
+            usersDataArray.push(doc.data());
+            console.log(doc.data());
+            loginBtn.innerHTML = `${doc.data().firstname} ${doc.data().lastname}<div class="dropdown dropdown-end">
                 <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
                     <div class="w-10 rounded-full">
                         <img alt="Tailwind CSS Navbar component"
@@ -87,32 +88,27 @@ function Logout() {
     });
 };
 GetUserDataFromFirestore();
-
+productTitleh2.innerHTML=productarray[0].productTitle
 function rander() {
-    randerDiv.innerHTML =` <div class="max-w-lg sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl mx-auto bg-white rounded shadow-lg overflow-hidden flex flex-col md:flex-row" id="randerDiv">
+    randerDiv.innerHTML = ` <div class="max-w-lg sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl mx-auto bg-white rounded shadow-lg overflow-hidden flex flex-col md:flex-row" id="randerDiv">
            
 
-            <div class="relative flex justify-center md:w-1/2">
-                <img src="${productarray[0].productdimage}" alt="iPhone XS"
-                    class="padding-auto ml-[10px] h-64 md:h-full object-cover">
-            </div>
+            <div class="relative flex justify-center w-full md:w-1/2">
+    <img src="${productarray[0].productdimage}" alt="iPhone XS"
+         class="p-2 md:p-4 w-[100%] object-cover">
+</div>
 
 
             <div class="p-6 md:w-1/2">
                 <!-- Price and Title Section -->
                 <div class="text-2xl font-bold text-gray-800">Rs ${productarray[0].productdprice}</div>
                 <div class="text-lg text-gray-600">${productarray[0].productTitle}</div>
-                <div class="text-sm text-gray-500 mt-2">iPhone XS Max 64GB PTA Approved</div>
+                <div class="text-sm text-gray-500 mt-2">${productarray[0].ProductionDescription}</div>
 
 
                 <div class="mt-4 flex items-center">
-                    <div class="rounded-full bg-gray-200 p-2">
-                        <svg class="w-8 h-8 text-gray-600 fill-current" xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="10" />
-                            <path d="M16 16c0-1.54-2.46-2.25-4-2.25S8 14.46 8 16" />
-                            <circle cx="12" cy="8" r="3" />
-                        </svg>
+                    <div class="rounded-full flex items-center justify-center bg-gray-200 p-2">
+                        <img src="${productarray[0].usersDataArray[0].userimage}" class="w-[20px] rounded-full h-[30px]"  alt="">
                     </div>
                     <div class="ml-4">
                         <div class="text-sm font-bold text-gray-800">${productarray[0].ownername}</div>

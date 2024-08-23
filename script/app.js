@@ -86,7 +86,7 @@ async function getCard() {
     querySnapshot.forEach((doc) => {
         allproducts.push({...doc.data(),id:doc.id})
         // console.log(doc.data());
-        // console.log(allproducts);     
+        console.log(allproducts);     
     });
     renderproducts(allproducts)
 }
@@ -100,8 +100,8 @@ async function renderproducts(allProductsArray) {
 
     allProductsArray.forEach((item) => {
         productscards.innerHTML += `
-        <div class="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white">
-            <img class="w-full h-56 object-cover" src="${item.productdimage}" alt="Product Image">
+        <div class="w-[400px] rounded-lg overflow-hidden shadow-lg bg-white">
+            <img class="w-full h-[200px] object-cover" src="${item.productdimage}" alt="Product Image">
             <div class="p-6">
                 <div class="flex items-center justify-between mb-4">
                     <h2 class="text-2xl font-semibold text-gray-800">${item.productTitle}</h2>
