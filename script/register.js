@@ -44,6 +44,7 @@ let array = [];
 
 form.addEventListener('submit', async event => {
     event.preventDefault();
+    registerBtn.disabled = true
     registerBtn.innerHTML = `<img class="loading" src="./image/loading.gif" alt="no img">`
     let userimageurl = await showUrl(userimage);
     if (email.value === '' && password.value === '' && firstname.value === '' && lastname.value === '' && !userimage.files.length) {
@@ -82,6 +83,7 @@ form.addEventListener('submit', async event => {
 
         // alert('You are registered');
         // window.location = '../login.html';
+        registerBtn.disabled = false
     } catch (error) {
         console.error("Error during registration: ", error);
         Swal.fire({
