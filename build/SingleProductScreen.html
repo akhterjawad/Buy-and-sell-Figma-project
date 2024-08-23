@@ -4,18 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>products</title>
+    <title>SingleProducts</title>
     <style>
-        /* Reset margins and padding for all elements, and use border-box sizing */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
+        /* .padding-auto{
+            padding: 0% auto;
+        } */
     </style>
-    <!-- Link to DaisyUI for styling -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
-    <!-- FontAwesome link for icons -->
+    <!-- FONTAWESOME LINK -->
     <script src="https://kit.fontawesome.com/c168b7d2e2.js" crossorigin="anonymous"></script>
 </head>
 
@@ -37,31 +39,26 @@
     </div>
 
 
-    <!-- Container for the product section -->
-    <div class="rounded w-[90%] border border-gray-300 mb-7 mt-7 m-auto bg-[#FFF6F6] ">
-        <!-- Search bar -->
-        <label class="input w-[90%] h-[50px] m-auto mt-5 input-bordered flex items-center gap-5">
-            <!-- Search icon -->
+    <div class="rounded w-[90%] p-6 border border-gray-300 mb-7 mt-7 m-auto bg-[#FFF6F6] ">
+        <label class="input w-[95%] h-[50px] m-auto mt-5 input-bordered flex items-center gap-5">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4 opacity-70">
                 <path fill-rule="evenodd"
                     d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
                     clip-rule="evenodd" />
             </svg>
-            <!-- Input field for search -->
-            <input type="text" class="grow" placeholder="Search" id="search" />
+            <input type="text" class="grow" placeholder="Search" />
         </label>
-        <!-- Section title -->
-        <h2 class="text-4xl mt-[50px] mb-[50px] ml-[50px] font-semibold">Product</h2>
-        <!-- Container for product cards -->
-        <div class="flex-wrap mb-7 flex justify-evenly items-center gap-5" id="productscards">
-            <!-- Product card -->
+        <h2 class="text-3xl sm:text-4xl m-[30px]  sm:m-[50px] font-semibold" id="productTitle"></h2>
 
-        </div>
-    </div>
-    </div>
-    <!-- Tailwind CSS script -->
-    <script type="module" src="./script/app.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+
+
+
+<div id="randerDiv" ></div>
+
+       
+
+        <script type="module" src="./script/singleProductScreen.js"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
 </body>
 
 </html>

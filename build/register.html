@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <!-- Global styles -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    </style>
+    <!-- Linking DaisyUI stylesheet -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <!-- Navbar with title -->
+    <div class="bg-blue-500 navbar border flex justify-start items-center h-16 text-2xl sm:text-3xl">
+        <p class="ml-5 text-white">Buy / Sells Corner</p>
+    </div>
+    <!-- Main content container, centered vertically and horizontally -->
+    <div class="h-[89vh] flex items-center justify-center">
+        <!-- Form container -->
+        <form id="form" class="bg-[#FFF6F6] p-[40px] pt-[38px] pb-[35px] border-gray-300 w-[350px] border rounded-3xl ">
+            <label class="bg-[#FFF6F6] mt-2 input input-bordered flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                    class="h-4 w-4 opacity-70">
+                    <path
+                        d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
+                </svg>
+                <!-- First Name input -->
+                <input type="text" required class="grow" id="firstname" placeholder="First name" />
+            </label>
+            <label class="bg-[#FFF6F6] mt-2 input input-bordered flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                    class="h-4 w-4 opacity-70">
+                    <path
+                        d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
+                </svg>
+                <!-- Last Name input -->
+                <input type="text" required class="grow" id="lastname" placeholder="Last name" />
+            </label>
+
+            <label class="bg-[#FFF6F6] mt-2 input input-bordered flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                    class="h-4 w-4 opacity-70">
+                    <path
+                        d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
+                    <path
+                        d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
+                </svg>
+                <!-- Email input -->
+                <input type="email" required class="grow" id="email" placeholder="Email" />
+            </label>
+
+            <label class="bg-[#FFF6F6] mt-2 input input-bordered flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                    class="h-4 w-4 opacity-70">
+                    <path fill-rule="evenodd"
+                        d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z"
+                        clip-rule="evenodd" />
+                </svg>
+                <!-- Password input -->
+                <input type="password" id="password" class="grow" value="password" minlength="8" maxlength="10" required />
+            </label>
+
+            <!-- File input for profile picture -->
+            <input required type="file" id="userimage"
+                class="mt-3 file-input file-input-bordered file-input-primary w-full max-w-xs" />
+
+            <!-- Register button -->
+            <div class="flex justify-center mt-5 mb-5 items-center">
+                <button type="submit"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                    id="registerBtn">Register</button>
+            </div>
+
+            <!-- Link to login page -->
+            <div class="flex justify-center items-center">
+                <a href="./login.html" class="text-blue-500">Already a user?</a>
+            </div>
+        </form>
+    </div>
+    
+    <!-- Script files -->
+    <script type="module" src="./script/register.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.all.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</body>
+
+</html>
