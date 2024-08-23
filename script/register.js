@@ -72,7 +72,7 @@ form.addEventListener('submit', async event => {
             title: 'Success!',
             text: 'Your account registered successfully!',
             icon: 'success',
-            confirmButtonText: 'Login'
+            confirmButtonText: 'register'
         })
             .then((result) => {
                 if (result.isConfirmed) {

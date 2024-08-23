@@ -132,91 +132,87 @@ async function showUrl(file) {
 // Event listener for the form submission
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
+  addBtn.disabled = true
   addBtn.innerHTML = `<img class="loading" src="./image/loading.gif" alt="no img">`; // Display loading icon
   let ownernumberRegex = /^0\d{10}$/;
 
-  // Check if all input fields are filled
-  if (
-    productTitle.value === `` ||
-    ProductionDescription.value === `` ||
-    productdprice.value === `` ||
-    ownername.value === `` ||
-    ownernumber.value === `` ||
-    !ownernumberRegex.test(ownernumber.value) ||
-    !file
-  ) {
-    if (ownernumber.value === `` || !ownernumberRegex.test(ownernumber.value)) {
-      alert('Enter a number that starts with 0 and has a length of 11 digits.');
-    } else {
-      alert(`Please reload your page because you did not fill these input fields`);
+
+
+  // Function to format the phone number to start with +92
+  function replaceFirstDigitWithCode(number) {
+    let numberStr = number.toString();
+    if (numberStr.startsWith("+92")) {
+      return numberStr;
     }
-    return;
-  } else {
-    console.log("true ownernumber");
+    let modifiedOwnerNumber = "+92" + numberStr.slice(1);
+    return modifiedOwnerNumber;
   }
-  
+  let modifiedOwnerNumber = replaceFirstDigitWithCode(ownernumber.value);
+  console.log(modifiedOwnerNumber);
 
+  let userimageurl = await showUrl(file); // Upload the image and get the URL
+  console.log(userimageurl);
 
-// Function to format the phone number to start with +92
-function replaceFirstDigitWithCode(number) {
-  let numberStr = number.toString();
-  if (numberStr.startsWith("+92")) {
-    return numberStr;
+  adddata(); // Call the function to add the product data to Firestore
+
+  // Function to add product data to Firestore
+  async function adddata() {
+    // Check if all input fields are filled
+    if (
+      productTitle.value === `` ||
+      ProductionDescription.value === `` ||
+      productdprice.value === `` ||
+      ownername.value === `` ||
+      ownernumber.value === `` ||
+      !ownernumberRegex.test(ownernumber.value) ||
+      !file
+    ) {
+      console.log("true ownernumber");
+    } 
+    try {
+      const docRef = await addDoc(collection(db, "userproducts"), {
+        ownername: ownername.value,
+        ownernumber: modifiedOwnerNumber,
+        productTitle: productTitle.value,
+        ProductionDescription: ProductionDescription.value,
+        productdprice: productdprice.value,
+        productdimage: userimageurl,
+        usersDataArray
+      });
+
+      Swal.fire({
+        title: 'Success!',
+        text: 'Your product is added',
+        icon: 'success',
+        confirmButtonText: 'added'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          console.log("Document written with ID: ", docRef.id);
+        }
+        // Reset form fields
+        ownername.value = "";
+        ownernumber.value = "";
+        productTitle.value = "";
+        ProductionDescription.value = "";
+        productdprice.value = "";
+        file=``
+        document.querySelector('#productimage img').src = "./image/Plus_rectangle.png"; // Reset the product image
+        addBtn.disabled = false
+      });
+
+    } catch (e) {
+      addBtn.innerHTML = `AD Post`;
+      console.log("Error adding document: ", e);
+      Swal.fire({
+        title: 'Error!',
+        text: e,
+        icon: 'error',
+        confirmButtonText: 'Try Again'
+      });
+    }
+
+    addBtn.innerHTML = `AD Post`; // Reset the add button text
   }
-  let modifiedOwnerNumber = "+92" + numberStr.slice(1);
-  return modifiedOwnerNumber;
-}
-let modifiedOwnerNumber = replaceFirstDigitWithCode(ownernumber.value);
-console.log(modifiedOwnerNumber);
 
-let userimageurl = await showUrl(file); // Upload the image and get the URL
-console.log(userimageurl);
 
-adddata(); // Call the function to add the product data to Firestore
-
-// Function to add product data to Firestore
-async function adddata() {
-  try {
-    const docRef = await addDoc(collection(db, "userproducts"), {
-      ownername: ownername.value,
-      ownernumber: modifiedOwnerNumber,
-      productTitle: productTitle.value,
-      ProductionDescription: ProductionDescription.value,
-      productdprice: productdprice.value,
-      productdimage: userimageurl,
-      usersDataArray
-    });
-
-    Swal.fire({
-      title: 'Success!',
-      text: 'Your product is added',
-      icon: 'success',
-      confirmButtonText: 'added'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        console.log("Document written with ID: ", docRef.id);
-      }
-    });
-
-  } catch (e) {
-    console.log("Error adding document: ", e);
-    Swal.fire({
-      title: 'Error!',
-      text: e,
-      icon: 'error',
-      confirmButtonText: 'Try Again'
-    });
-  }
-
-  addBtn.innerHTML = `AD Post`; // Reset the add button text
-}
-
-// Reset form fields
-ownername.value = "";
-ownernumber.value = "";
-productTitle.value = "";
-ProductionDescription.value = "";
-productdprice.value = "";
-file = "";
-document.querySelector('#productimage').src = '../image/Plus_rectangle.png"'; // Reset the product image
 });

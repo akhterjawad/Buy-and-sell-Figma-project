@@ -25,6 +25,7 @@ let productTitleh2 = document.querySelector('#productTitle');
 let usersDataArray = [];
 let productarray = JSON.parse(localStorage.getItem('products'));
 let isLoggingOut = false; // Flag to indicate if the user is logging out
+console.log(productarray);
 
 // Monitor the authentication state of the user
 onAuthStateChanged(auth, (user) => {
