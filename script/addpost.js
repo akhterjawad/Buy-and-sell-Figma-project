@@ -47,13 +47,13 @@ onAuthStateChanged(auth, (user) => {
 
 async function GetUserDataFromFirestore() {
   try {
-      const querySnapshot = await getDocs(collection(db, "users"));
-      querySnapshot.forEach((doc) => {
-          if (doc.data().Uid === uid) {
-              usersDataArray.push(doc.data());
-              console.log(usersDataArray);
-              console.log(doc.data());
-              loginBtn.innerHTML = `<p class="text-white text-[0.7rem] sm:text-[1rem]">${doc.data().firstname} ${doc.data().lastname}</p> <div class="dropdown dropdown-end">
+    const querySnapshot = await getDocs(collection(db, "users"));
+    querySnapshot.forEach((doc) => {
+      if (doc.data().Uid === uid) {
+        usersDataArray.push(doc.data());
+        console.log(usersDataArray);
+        console.log(doc.data());
+        loginBtn.innerHTML = `<p class="text-white text-[0.7rem] sm:text-[1rem]">${doc.data().firstname} ${doc.data().lastname}</p> <div class="dropdown dropdown-end">
               <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
                   <div class="w-10 rounded-full">
                       <img alt="Tailwind CSS Navbar component"
@@ -72,12 +72,12 @@ async function GetUserDataFromFirestore() {
                   <li><a id="button" class="button ">Logout</a></li>
               </ul>
           </div>`;
-          }
-          logoutButton = document.querySelector('#button');
-      });
-      Logout()
+      }
+      logoutButton = document.querySelector('#button');
+    });
+    Logout()
   } catch (error) {
-      console.log("Error getting documents: ", error);
+    console.log("Error getting documents: ", error);
   }
 };
 function Logout() {
@@ -133,6 +133,7 @@ async function showUrl(file) {
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
   addBtn.innerHTML = `<img class="loading" src="./image/loading.gif" alt="no img">`; // Display loading icon
+  let ownernumberRegex = /^0\d{10}$/;
 
   // Check if all input fields are filled
   if (
@@ -141,72 +142,81 @@ form.addEventListener('submit', async (event) => {
     productdprice.value === `` ||
     ownername.value === `` ||
     ownernumber.value === `` ||
+    !ownernumberRegex.test(ownernumber.value) ||
     !file
   ) {
-    alert(`Please reload your page because you did not fill these input fields`);
+    if (ownernumber.value === `` || !ownernumberRegex.test(ownernumber.value)) {
+      alert('Enter a number that starts with 0 and has a length of 11 digits.');
+    } else {
+      alert(`Please reload your page because you did not fill these input fields`);
+    }
     return;
+  } else {
+    console.log("true ownernumber");
+  }
+  
+
+
+// Function to format the phone number to start with +92
+function replaceFirstDigitWithCode(number) {
+  let numberStr = number.toString();
+  if (numberStr.startsWith("+92")) {
+    return numberStr;
+  }
+  let modifiedOwnerNumber = "+92" + numberStr.slice(1);
+  return modifiedOwnerNumber;
+}
+let modifiedOwnerNumber = replaceFirstDigitWithCode(ownernumber.value);
+console.log(modifiedOwnerNumber);
+
+let userimageurl = await showUrl(file); // Upload the image and get the URL
+console.log(userimageurl);
+
+adddata(); // Call the function to add the product data to Firestore
+
+// Function to add product data to Firestore
+async function adddata() {
+  try {
+    const docRef = await addDoc(collection(db, "userproducts"), {
+      ownername: ownername.value,
+      ownernumber: modifiedOwnerNumber,
+      productTitle: productTitle.value,
+      ProductionDescription: ProductionDescription.value,
+      productdprice: productdprice.value,
+      productdimage: userimageurl,
+      usersDataArray
+    });
+
+    Swal.fire({
+      title: 'Success!',
+      text: 'Your product is added',
+      icon: 'success',
+      confirmButtonText: 'added'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        console.log("Document written with ID: ", docRef.id);
+      }
+    });
+
+  } catch (e) {
+    console.log("Error adding document: ", e);
+    Swal.fire({
+      title: 'Error!',
+      text: e,
+      icon: 'error',
+      confirmButtonText: 'Try Again'
+    });
   }
 
-  // Function to format the phone number to start with +92
-  function replaceFirstDigitWithCode(number) {
-    let numberStr = number.toString();
-    if (numberStr.startsWith("+92")) {
-      return numberStr;
-    }
-    let modifiedOwnerNumber = "+92" + numberStr.slice(1);
-    return modifiedOwnerNumber;
-  }
-  let modifiedOwnerNumber = replaceFirstDigitWithCode(ownernumber.value);
-  console.log(modifiedOwnerNumber);
+  addBtn.innerHTML = `AD Post`; // Reset the add button text
+}
 
-  let userimageurl = await showUrl(file); // Upload the image and get the URL
-  console.log(userimageurl);
-
-  adddata(); // Call the function to add the product data to Firestore
-
-  // Function to add product data to Firestore
-  async function adddata() {
-    try {
-      const docRef = await addDoc(collection(db, "userproducts"), {
-        ownername: ownername.value,
-        ownernumber: modifiedOwnerNumber,
-        productTitle: productTitle.value,
-        ProductionDescription: ProductionDescription.value,
-        productdprice: productdprice.value,
-        productdimage: userimageurl,
-        usersDataArray
-      });
-
-      Swal.fire({
-        title: 'Success!',
-        text: 'Your product is added',
-        icon: 'success',
-        confirmButtonText: 'added'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          console.log("Document written with ID: ", docRef.id);
-        }
-      });
-
-    } catch (e) {
-      console.log("Error adding document: ", e);
-      Swal.fire({
-        title: 'Error!',
-        text: e,
-        icon: 'error',
-        confirmButtonText: 'Try Again'
-      });
-    }
-
-    addBtn.innerHTML = `AD Post`; // Reset the add button text
-  }
-
-  // Reset form fields
-  ownername.value = "";
-  ownernumber.value = "";
-  productTitle.value = "";
-  ProductionDescription.value = "";
-  productdprice.value = "";
-  file = "";
-  document.querySelector('#productimage').src = '../image/Plus_rectangle.png"'; // Reset the product image
+// Reset form fields
+ownername.value = "";
+ownernumber.value = "";
+productTitle.value = "";
+ProductionDescription.value = "";
+productdprice.value = "";
+file = "";
+document.querySelector('#productimage').src = '../image/Plus_rectangle.png"'; // Reset the product image
 });
