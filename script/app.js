@@ -13,6 +13,7 @@ let loginBtn = document.querySelector('#divLogin');
 let uid;
 let logoutButton;
 let productscards = document.querySelector('#productscards')
+let search = document.querySelector('#search')
 let allproducts = [];
 onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -97,6 +98,7 @@ console.log(allproducts);
 // productscards.inn
 async function renderproducts(allProductsArray) {
     console.log(allProductsArray);
+    productscards.innerHTML = ""; // Add this line at the beginning of the renderproducts function
 
     allProductsArray.forEach((item) => {
         productscards.innerHTML += `
@@ -136,3 +138,9 @@ async function renderproducts(allProductsArray) {
         });
     });
 }
+// Search functionality
+search.addEventListener('input', () => {
+    const query = search.value.toLowerCase();
+    const filteredProduct = allproducts.filter(product => product.productTitle.toLowerCase().includes(query));
+    renderproducts(filteredProduct);
+});
