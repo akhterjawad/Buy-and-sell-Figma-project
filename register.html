@@ -26,32 +26,26 @@
     <div class="h-[89vh] flex items-center justify-center">
         <!-- Form container -->
         <form id="form" class="bg-[#FFF6F6] p-[40px] pt-[38px] pb-[35px] border-gray-300 w-[350px] border rounded-3xl ">
-            <!-- First Name field -->
             <label class="bg-[#FFF6F6] mt-2 input input-bordered flex items-center gap-2">
-                <!-- User icon -->
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
                     class="h-4 w-4 opacity-70">
                     <path
                         d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
                 </svg>
                 <!-- First Name input -->
-                <input type="text" class="grow" id="firstname" placeholder="First name" />
+                <input type="text" required class="grow" id="firstname" placeholder="First name" />
             </label>
-            <!-- Last Name field -->
             <label class="bg-[#FFF6F6] mt-2 input input-bordered flex items-center gap-2">
-                <!-- User icon -->
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
                     class="h-4 w-4 opacity-70">
                     <path
                         d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
                 </svg>
                 <!-- Last Name input -->
-                <input type="text" class="grow" id="lastname" placeholder="Last name" />
+                <input type="text" required class="grow" id="lastname" placeholder="Last name" />
             </label>
 
-            <!-- Email field -->
             <label class="bg-[#FFF6F6] mt-2 input input-bordered flex items-center gap-2">
-                <!-- Email icon -->
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
                     class="h-4 w-4 opacity-70">
                     <path
@@ -60,12 +54,10 @@
                         d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
                 </svg>
                 <!-- Email input -->
-                <input type="email" class="grow" id="email" placeholder="Email" />
+                <input type="email" required class="grow" id="email" placeholder="Email" />
             </label>
 
-            <!-- Password field -->
             <label class="bg-[#FFF6F6] mt-2 input input-bordered flex items-center gap-2">
-                <!-- Password icon -->
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
                     class="h-4 w-4 opacity-70">
                     <path fill-rule="evenodd"
@@ -73,11 +65,11 @@
                         clip-rule="evenodd" />
                 </svg>
                 <!-- Password input -->
-                <input type="password" id="password" class="grow" value="password" minlength="8" maxlength="10" />
+                <input type="password" id="password" class="grow" value="password" minlength="8" maxlength="10" required />
             </label>
 
             <!-- File input for profile picture -->
-            <input type="file" id="userimage"
+            <input required type="file" id="userimage"
                 class="mt-3 file-input file-input-bordered file-input-primary w-full max-w-xs" />
 
             <!-- Register button -->
