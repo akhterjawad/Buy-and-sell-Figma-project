@@ -94,10 +94,11 @@ function rander() {
     randerDiv.innerHTML = ` <div class="max-w-lg sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl mx-auto bg-white rounded shadow-lg overflow-hidden flex flex-col md:flex-row" id="randerDiv">
            
 
-            <div class="relative flex justify-center w-full md:w-1/2">
-    <img src="${productarray[0].productdimage}" alt="iPhone XS"
-         class="p-2 md:p-4 w-[100%] object-cover">
+            <div class="relative flex justify-center w-full">
+    <img src="${productarray[0].productdimage}" alt="product img"
+         class="p-2 md:p-4 w-full object-cover">
 </div>
+
 
 
             <div class="p-6 md:w-1/2">
