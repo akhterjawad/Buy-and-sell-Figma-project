@@ -67,7 +67,7 @@ async function GetUserDataFromFirestore() {
         console.log("Error getting documents: ", error);
     }
 };
- function Logout() {
+function Logout() {
     logoutButton.addEventListener('click', () => {
         signOut(auth).then(() => {
             console.log(`Sign-out successful.`);
@@ -84,9 +84,9 @@ async function getCard() {
     // const q = query(collection(db, "userproducts"), where("uid", "==", User.uid));
     let querySnapshot = await getDocs(collection(db, "userproducts"));
     querySnapshot.forEach((doc) => {
-        allproducts.push({...doc.data(),id:doc.id})
+        allproducts.push({ ...doc.data(), id: doc.id })
         // console.log(doc.data());
-        console.log(allproducts);     
+        console.log(allproducts);
     });
     renderproducts(allproducts)
 }
@@ -101,9 +101,9 @@ async function renderproducts(allProductsArray) {
 
     allProductsArray.forEach((item) => {
         productscards.innerHTML += `
-        <div class="w-[400px] rounded-lg overflow-hidden shadow-lg bg-white">
-    <div class="w-full h-[200px] flex items-center justify-center">
-        <img class=" h-full object-cover" src="${item.productdimage}" alt="Product Image">
+        <div class="w-[385px] rounded-lg overflow-hidden shadow-lg bg-white">
+    <div class="w-full h-[200px] bg-blue-100 flex items-center justify-center">
+        <img class="rounded  h-full object-cover" src="${item.productdimage}" alt="Product Image">
     </div>
     <div class="p-6">
         <div class="flex items-center justify-between mb-4">
