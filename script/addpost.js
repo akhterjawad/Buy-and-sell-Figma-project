@@ -164,52 +164,56 @@ form.addEventListener('submit', async (event) => {
       productdprice.value === `` ||
       ownername.value === `` ||
       ownernumber.value === `` ||
-      !ownernumberRegex.test(ownernumber.value) ||
+      ownernumberRegex.test(ownernumber.value) ||
       !file
     ) {
-      console.log("true ownernumber");
-    } 
-    try {
-      const docRef = await addDoc(collection(db, "userproducts"), {
-        ownername: ownername.value,
-        ownernumber: modifiedOwnerNumber,
-        productTitle: productTitle.value,
-        ProductionDescription: ProductionDescription.value,
-        productdprice: productdprice.value,
-        productdimage: userimageurl,
-        usersDataArray
-      });
+      alert(`fill the all inputs and check your Net connection`)
+      addBtn.disabled = false
 
-      Swal.fire({
-        title: 'Success!',
-        text: 'Your product is added',
-        icon: 'success',
-        confirmButtonText: 'added'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          console.log("Document written with ID: ", docRef.id);
-        }
-        // Reset form fields
-        ownername.value = "";
-        ownernumber.value = "";
-        productTitle.value = "";
-        ProductionDescription.value = "";
-        productdprice.value = "";
-        file=``
-        document.querySelector('#productimage img').src = "./image/Plus_rectangle.png"; // Reset the product image
-        addBtn.disabled = false
-      });
+    } else {
+      try {
+        const docRef = await addDoc(collection(db, "userproducts"), {
+          ownername: ownername.value,
+          ownernumber: modifiedOwnerNumber,
+          productTitle: productTitle.value,
+          ProductionDescription: ProductionDescription.value,
+          productdprice: productdprice.value,
+          productdimage: userimageurl,
+          usersDataArray
+        });
 
-    } catch (e) {
-      addBtn.innerHTML = `AD Post`;
-      console.log("Error adding document: ", e);
-      Swal.fire({
-        title: 'Error!',
-        text: e,
-        icon: 'error',
-        confirmButtonText: 'Try Again'
-      });
+        Swal.fire({
+          title: 'Success!',
+          text: 'Your product is added',
+          icon: 'success',
+          confirmButtonText: 'added'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            console.log("Document written with ID: ", docRef.id);
+          }
+          // Reset form fields
+          ownername.value = "";
+          ownernumber.value = "";
+          productTitle.value = "";
+          ProductionDescription.value = "";
+          productdprice.value = "";
+          file = ``
+          document.querySelector('#productimage img').src = "./image/Plus_rectangle.png"; // Reset the product image
+          addBtn.disabled = false
+        });
+
+      } catch (e) {
+        addBtn.innerHTML = `AD Post`;
+        console.log("Error adding document: ", e);
+        Swal.fire({
+          title: 'Error!',
+          text: e,
+          icon: 'error',
+          confirmButtonText: 'Try Again'
+        });
+      }
     }
+
 
     addBtn.innerHTML = `AD Post`; // Reset the add button text
   }
