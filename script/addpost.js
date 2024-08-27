@@ -163,7 +163,7 @@ form.addEventListener('submit', async (event) => {
       productdprice.value === `` ||
       ownername.value === `` ||
       ownernumber.value === `` ||
-      ownernumberRegex.test(ownernumber.value) ||
+      !ownernumberRegex.test(ownernumber.value) ||
       !file
     ) {
       alert(`fill the all inputs and check your Net connection`)

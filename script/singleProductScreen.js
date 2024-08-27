@@ -104,7 +104,7 @@ function rander() {
 
         <div class="mt-4 flex items-center">
             <div class="rounded-full flex items-center justify-center bg-gray-200 p-2">
-                <img src="${productarray[0].usersDataArray[0].userimage}" class="w-[22px] rounded-full h-[33px]"  alt="">
+                <img src="${productarray[0].usersDataArray[0].userimage}" class="w-[33px] rounded-full h-full"  alt="">
             </div>
             <div class="ml-4">
                 <div class="text-sm font-bold text-gray-800">${productarray[0].ownername}</div>
