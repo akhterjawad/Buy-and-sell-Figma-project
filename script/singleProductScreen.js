@@ -125,7 +125,7 @@ function rander() {
 
 
                 <div class="mt-6">
-                    <button class="bg-purple-700 text-white w-full py-2 rounded-lg" id="addToCart">Add to Cart</button>
+                    <button class="bg-purple-700 text-white w-full py-2 rounded-lg" id="addToCart">${productarray[0].usersDataArray[0].email}</button>
                 </div>
 
 
@@ -167,9 +167,9 @@ function rander() {
 };
 rander();
 
-document.addEventListener('DOMContentLoaded', (event) => {
-    let addToCart = document.querySelector('#addToCart');
-    addToCart.addEventListener('click', () => {
-        alert(`Your product is now on the way`);
-    });
-});
+// document.addEventListener('DOMContentLoaded', (event) => {
+//     let addToCart = document.querySelector('#addToCart');
+//     addToCart.addEventListener('click', () => {
+//         alert(`Your product is now on the way`);
+//     });
+// });
