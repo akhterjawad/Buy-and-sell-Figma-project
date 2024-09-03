@@ -31,10 +31,10 @@ console.log(productarray);
 onAuthStateChanged(auth, (user) => {
   if (user) {
     uid = user.uid;
-    console.log(uid);
+    // console.log(uid);
     loginBtn.innerHTML = ''
   } else if (!isLoggingOut) { // Check if the user is not logging out
-    console.log(`User is signed out`);
+    // console.log(`User is signed out`);
     alert(`Please login first then you can see a add`);
     window.location = `../login.html`;
   }
@@ -80,7 +80,7 @@ function Logout() {
     logoutButton.addEventListener('click', () => {
       isLoggingOut = true; // Set the flag to true when logging out
       signOut(auth).then(() => {
-        console.log(`Sign-out successful.`);
+        // console.log(`Sign-out successful.`);
         window.location = `../login.html`;
       }).catch((error) => {
         // An error happened.

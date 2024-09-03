@@ -109,7 +109,7 @@ async function showUrl(profile) {
     try {
         const uplordimage = await uploadBytes(storageRef, files);
         const url = await getDownloadURL(storageRef);
-        console.log(url);
+        // console.log(url);
         return url
 
     } catch (error) {
