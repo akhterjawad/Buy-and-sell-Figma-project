@@ -48,7 +48,7 @@ async function GetUserDataFromFirestore() {
             if (doc.data().Uid===uid) {
                 
                 usersDataArray.push(doc.data());
-                console.log(doc.data());
+                // console.log(doc.data());
                 loginBtn.innerHTML = `<p class="text-white text-[0.7rem] sm:text-[1rem]">${doc.data().firstname} ${doc.data().lastname}</p> <div class="dropdown dropdown-end">
                 <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
                     <div class="w-10 rounded-full">

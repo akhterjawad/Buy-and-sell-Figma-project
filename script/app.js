@@ -97,14 +97,13 @@ getCard()
 productscards.innerHTML = `<img class="loading w-[10%] mb-10" src="./image/loading.gif" alt="no img">`;
 
 // Function to render products
-async function renderproducts(allProductsArray) {
+function renderproducts(allProductsArray) {
     if (allProductsArray.length === 0) {
         productscards.innerHTML = "<h1>No products found</h1>";
         return;
     }
 
     productscards.innerHTML = "";
-    // Add your code to render products here...
     allProductsArray.forEach((item) => {
         productscards.innerHTML += `
         <div class="w-[385px] rounded-lg overflow-hidden shadow-lg bg-white">
@@ -125,28 +124,26 @@ async function renderproducts(allProductsArray) {
         </div>
         </div>
         `;
-    })
+    });
+
+    let buynowButtons = document.querySelectorAll('.buynow');
+
+    buynowButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            let productId = button.getAttribute('data-id');
+            let productCard = allproducts.find((product) => product.id === productId);
+
+            if (productCard) {
+                console.log('Selected Product:', productCard);
+                localStorage.setItem('products', JSON.stringify([productCard]));
+                window.location = "../SingleProductScreen.html";
+            } else {
+                console.error('Product not found!');
+            }
+        });
+    });
 }
 
-
-let buynowButtons = document.querySelectorAll('.buynow');
-
-buynowButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-        let productId = button.getAttribute('data-id');
-        let productCard = allproducts.find((product) => product.id === productId);
-
-        if (productCard) {
-            console.log('Selected Product:', productCard);
-            localStorage.setItem('products', JSON.stringify([productCard]));
-
-            // Redirect to the single product screen (if necessary)
-            window.location = "../SingleProductScreen.html";
-        } else {
-            console.error('Product not found!');
-        }
-    });
-});
 
 // Search functionality
 search.addEventListener('input', () => {
