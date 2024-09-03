@@ -110,7 +110,7 @@ fileInput.addEventListener('change', function (event) {
       document.querySelector('#productimage img').src = e.target.result;
     };
     reader.readAsDataURL(file);
-    console.log(file);
+    // console.log(file);
   }
 });
 
@@ -121,10 +121,10 @@ async function showUrl(file) {
   try {
     const uploadimage = await uploadBytes(storageRef, file); // Upload the file to Firebase Storage
     const url = await getDownloadURL(storageRef); // Get the download URL of the uploaded file
-    console.log(url);
+    // console.log(url);
     return url;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 }
 
@@ -147,10 +147,10 @@ form.addEventListener('submit', async (event) => {
     return modifiedOwnerNumber;
   }
   let modifiedOwnerNumber = replaceFirstDigitWithCode(ownernumber.value);
-  console.log(modifiedOwnerNumber);
+  // console.log(modifiedOwnerNumber);
 
   let userimageurl = await showUrl(file); // Upload the image and get the URL
-  console.log(userimageurl);
+  // console.log(userimageurl);
 
   adddata(); // Call the function to add the product data to Firestore
 
